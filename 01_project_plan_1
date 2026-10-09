@@ -1,66 +1,453 @@
->> ### Project Plan : IT PM Project 1 ###<<
-1. Course Name : IT Project Management
-2. Team Information
-- Team Name: DRM
-- Team Members (Name / Student ID / Role):
- > Leader Name: Usenadinova Dilaram,  Student ID: 202490349, Group: I24C, Role: Leader, Phone Number: +998 88 721 20 06  
- > Member Name 1:Ergasheva Madinabonu,  Student ID: 202490107, Group: I24C,Role: Designer 
- > Member Name 2:Baxtiyorova Ruxshona,  Student ID: 202490081, Group: I24C, Role: Data Analyst  
+# Project Plan: IT PM Project 1
 
-3. Project Title : Data Analysis
-- (Provide a clear and descriptive title for your project.)
+## 1. Course Name
 
-4. Dataset Information
-- Dataset Title:
-- Source Website / URL:
-- Description of the dataset:
-- Why this dataset was selected:
-- Size of dataset (rows, columns):
+IT Project Management
 
-5. Project Objectives
-- What problem are you trying to solve?
-- What questions do you want to answer using data analysis?
-- Expected insights from the dataset.
+## 2. Team Information
 
-6. Data Preparation (Using Pandas)
-Describe clearly with code snippets and explanation:
-- Loading the dataset
-- Cleaning data (missing values, duplicates, data types)
-- Data transformation and feature creation
+Team Name: DRM
 
-7. Data Analysis Tasks (Using Pandas)
-Perform meaningful analysis using Pandas operations:
-- Filtering, sorting, grouping
-- Pivot tables or aggregation
-- Answer the questions defined in the objectives section
-- Include code and explanation
+Team Members (Name / Student ID / Role):
 
-8. Key Findings and Insights
-- What did you discover from the data?
-- Business or real-world interpretation of the results
+- Leader Name: Usenadinova Dilaram
+- Student ID: 202490349
+- Group: I24C
+- Role: Leader
+- Phone Number: +998 88 721 20 06
 
-9. Project Timeline (5 Weeks)
+Member Name 1: Ergasheva Madinabonu
 
-| Week                     |        Activities                   |
-|------------------------  |-------------------------------------|
-| Week 1(07.Sep ~ 13.Sep)  | Dataset search and project planning |
-| Week 2(14.Sep ~ 20.Sep)  | Data cleaning and preparation |
-| Week 3(21.Sep ~ 27.Sep)  |  Data analysis and visualization |
-| Week 5(28.Sep ~ 13.Oct)  | Report writing and presentation preparation |
-Presentation: 14.Oct
+- Student ID: 202490107
+- Group: I24C
+- Role: Designer
 
-10. Outcome of the Project
-- What students learned from this project
-- Skills developed in Pandas data analysis
+Member Name 2: Baxtiyorova Ruxshona
 
-11. Conclusion
-- Summary of the project and its importance
+- Student ID: 202490081
+- Group: I24C
+- Role: Data Analyst
 
-12. References
-- Dataset source
-- Tutorials, websites, or documentation used
+## 3. Project Title
 
-13. Appendix
-- Important code snippets
-- Additional charts or tables 
+Exploratory Data Analysis of Supermarket Sales Using Pandas
+
+This project focuses on analyzing supermarket sales data to understand sales performance, customer purchasing behavior, product category performance, and customer satisfaction. Python and Pandas will be used to prepare, analyze, and summarize the dataset.
+
+## 4. Dataset Information
+
+Dataset Title: Supermarket Sales Dataset
+
+Source Website / URL:
+
+https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales
+
+An accessible copy of the dataset is also available here:
+
+https://github.com/SarahShafqat/Kaggle-Datasets/blob/master/supermarket_sales.csv
+
+Description of the dataset:
+
+The Supermarket Sales Dataset contains historical sales transactions from three supermarket branches in Myanmar. The records cover January to March 2019.
+
+The dataset includes information about invoices, branch locations, customer types, gender, product categories, unit prices, quantities purchased, taxes, total sales, payment methods, gross income, and customer ratings.
+
+The dataset contains 1,000 sales records and 17 columns. It provides both numerical and categorical data, making it useful for exploratory data analysis.
+
+Why this dataset was selected:
+
+The dataset was selected because it is publicly available, understandable, and suitable for beginner-level data analysis. It contains different types of information that can be analyzed using Pandas.
+
+The dataset allows the team to practice data cleaning, filtering, sorting, grouping, aggregation, pivot tables, and visualization. It also helps demonstrate how data analysis can support business decisions.
+
+Size of dataset:
+
+- Rows: 1,000 sales transactions
+- Columns: 17 variables
+- Period covered: January–March 2019
+- Locations: Three supermarket branches in Myanmar
+
+The 1,000 rows refer to data records, excluding the header row in the CSV file.
+
+## 5. Project Objectives
+
+### What problem are you trying to solve?
+
+Businesses collect large amounts of sales data, but the data is not always easy to understand without analysis. Managers need to know which products perform well, which locations generate more revenue, how customers pay, and whether customers are satisfied.
+
+The purpose of this project is to analyze supermarket sales data and turn it into useful information that can support business decisions.
+
+### What questions do you want to answer using data analysis?
+
+1. Which product categories generate the highest total sales?
+2. Which supermarket branch or city generates the most revenue?
+3. Which payment method is used most frequently?
+4. What is the average transaction value?
+5. How many products are purchased per transaction on average?
+6. Which customer type generates more sales: members or normal customers?
+7. What is the average customer rating?
+8. How do sales change over the three-month period?
+
+### Expected insights from the dataset
+The analysis is expected to identify the best-performing product categories, compare sales between branches, identify common payment methods, and summarize customer purchasing behavior.
+
+It will also help the team understand customer ratings and sales trends. The findings may suggest ways to improve product availability, customer service, and sales strategies.
+
+## 6. Data Preparation (Using Pandas)
+
+Data preparation is necessary to ensure that the dataset is suitable for analysis. The team will use Python and the Pandas library.
+
+### 6.1 Loading the dataset
+
+import pandas as pd
+
+df = pd.read_csv("supermarket_sales.csv")
+
+print(df.head())
+print(df.shape)
+print(df.columns)
+print(df.info())
+Explanation:
+
+- import pandas as pd imports the Pandas library.
+- pd.read_csv() loads the CSV file into a DataFrame.
+- df.head() displays the first five records.
+- df.shape shows the number of rows and columns.
+- df.columns displays the column names.
+- df.info() shows column types and non-null values.
+
+The expected original dataset size is 1,000 rows and 17 columns.
+
+### 6.2 Cleaning the data
+
+# Check missing values
+print(df.isnull().sum())
+
+# Check duplicate records
+print("Duplicates:", df.duplicated().sum())
+
+# Remove duplicate records
+df = df.drop_duplicates()
+
+# Convert Date into datetime format
+df["Date"] = pd.to_datetime(
+    df["Date"], errors="coerce"
+)
+
+# Convert numerical columns into numeric types
+numeric_columns = [
+    "Unit price", "Quantity", "Tax 5%",
+    "Total", "cogs", "gross income", "Rating"
+]
+
+for col in numeric_columns:
+    df[col] = pd.to_numeric(df[col], errors="coerce")
+
+# Check the results
+print(df.isnull().sum())
+print(df.dtypes)
+Explanation:
+
+First, the team checks for missing values and duplicate records. Duplicate rows are removed to avoid counting the same record more than once.
+
+The Date column is converted to a datetime format so that sales can be grouped by month. Numerical columns are converted to numeric types to support mathematical calculations.
+
+The code uses errors="coerce" to convert invalid values into missing values. After checking the results, the team will decide how to handle any missing or invalid values. If a required value is missing, the affected record may be removed from the relevant analysis rather than filled with an invented value.
+
+### 6.3 Data transformation and feature creation
+
+# Create a month column
+df["Month"] = df["Date"].dt.month_name()
+
+# Create a weekday column
+df["Day"] = df["Date"].dt.day_name()
+
+# Create a sales category
+df["Sales Category"] = pd.cut(
+    df["Total"],
+    bins=[0, 200, 500, float("inf")],
+    labels=["Low", "Medium", "High"]
+)
+
+# Display transformed data
+print(df[
+    ["Date", "Month", "Day", "Total", "Sales Category"]
+].head())
+Explanation:
+
+The Month column identifies the month of each transaction, while Day identifies the day of the week. These columns help analyze sales patterns over time.
+
+The Sales Category column classifies transactions into low, medium, and high sales groups. These thresholds are chosen for this project as simple analytical categories; they are not official business classifications.
+
+## 7. Data Analysis Tasks (Using Pandas)
+
+The team will use Pandas operations to answer the research questions stated in Section 5.
+
+### 7.1 Filtering and sorting
+
+# Transactions with total sales above 500
+high_sales = df[df["Total"] > 500]
+print(high_sales.head())
+
+# Sort transactions by total sales
+sorted_sales = df.sort_values(
+    by="Total", ascending=False
+)
+print(sorted_sales.head(10))
+Explanation:
+
+Filtering identifies transactions with total sales above 500. Sorting displays the largest transactions first. This helps the team examine high-value purchases.
+
+### 7.2 Sales by product category
+product_sales = (
+    df.groupby("Product line")
+      .agg(
+          Total_Sales=("Total", "sum"),
+          Total_Quantity=("Quantity", "sum"),
+          Average_Rating=("Rating", "mean")
+      )
+      .sort_values("Total_Sales", ascending=False)
+)
+
+print(product_sales)
+Explanation:
+
+This analysis calculates total revenue, the number of items sold, and the average customer rating for each product category. Sorting by total sales helps identify the categories that contribute most to revenue.
+
+### 7.3 Sales by branch and city
+
+branch_sales = (
+    df.groupby(["Branch", "City"])
+      .agg(
+          Total_Sales=("Total", "sum"),
+          Transactions=("Invoice ID", "count"),
+          Average_Sale=("Total", "mean")
+      )
+      .sort_values("Total_Sales", ascending=False)
+)
+
+print(branch_sales)
+Explanation:
+
+The analysis compares the performance of the three branches. It calculates total revenue, transaction counts, and average transaction values. These results help identify differences in branch performance.
+
+### 7.4 Payment method analysis
+
+payment_analysis = (
+    df.groupby("Payment")
+      .agg(
+          Transactions=("Invoice ID", "count"),
+          Total_Sales=("Total", "sum")
+      )
+      .sort_values("Transactions", ascending=False)
+)
+
+payment_analysis["Percentage"] = (
+    payment_analysis["Transactions"]
+    / payment_analysis["Transactions"].sum()
+    * 100
+)
+
+print(payment_analysis)
+Explanation:
+
+This analysis shows which payment methods are used most often and how much revenue is associated with each method. The percentage column indicates the share of transactions made through each payment method.
+
+### 7.5 Average transaction value and quantity
+
+average_transaction = df["Total"].mean()
+average_quantity = df["Quantity"].mean()
+
+print("Average transaction value:", average_transaction)
+print("Average quantity per transaction:", average_quantity)
+Explanation:
+
+The average transaction value shows how much customers spend per transaction on average. The average quantity indicates how many items customers purchase per transaction.
+
+### 7.6 Member versus normal customers
+
+customer_analysis = (
+    df.groupby("Customer type")
+      .agg(
+          Transactions=("Invoice ID", "count"),
+          Total_Sales=("Total", "sum"),
+          Average_Sale=("Total", "mean"),
+          Average_Rating=("Rating", "mean")
+      )
+)
+
+print(customer_analysis)
+Explanation:
+
+This analysis compares customers who use membership cards with customers classified as normal customers in the dataset. It compares transaction counts, total sales, average transaction values, and customer ratings.
+
+### 7.7 Average customer rating
+
+average_rating = df["Rating"].mean()
+
+rating_by_product = (
+    df.groupby("Product line")["Rating"]
+      .mean()
+      .sort_values(ascending=False)
+)
+
+print("Average customer rating:", average_rating)
+print(rating_by_product)
+Explanation:
+
+The overall average rating summarizes customer satisfaction in the dataset. The category-level analysis shows whether average ratings differ between product categories.
+
+### 7.8 Monthly sales analysis
+
+monthly_sales = (
+    df.groupby(df["Date"].dt.to_period("M"))["Total"]
+      .sum()
+      .sort_index()
+)
+
+print(monthly_sales)
+Explanation:
+
+This analysis calculates total sales for each month. It can help the team identify whether revenue increased or decreased during the three-month period.
+
+### 7.9 Pivot table
+
+pivot_sales = pd.pivot_table(
+    df,
+    values="Total",
+    index="Product line",
+    columns="Customer type",
+    aggfunc="sum",
+    fill_value=0
+)
+
+print(pivot_sales)
+Explanation:
+
+The pivot table compares sales for each product category between member and normal customers. It provides a clear summary of purchasing behavior across different customer groups.
+
+### 7.10 Data visualization
+
+`python
+import matplotlib.pyplot as plt
+product_sales["Total_Sales"].plot(
+    kind="bar",
+    title="Total Sales by Product Category"
+)
+
+plt.xlabel("Product Category")
+plt.ylabel("Total Sales")
+plt.xticks(rotation=45, ha="right")
+plt.tight_layout()
+plt.show()
+`
+
+Explanation:
+
+A bar chart makes it easier to compare total sales across product categories. The team can also create charts for branch performance, payment methods, monthly sales, and customer ratings.
+
+## 8. Key Findings and Insights
+
+The final findings will be confirmed by running the code on the selected dataset. The following are preliminary findings and questions to investigate, rather than results independently produced by the DRM team.
+
+1. Sales performance: The product category with the highest total revenue will be identified using the product category aggregation.
+2. Branch performance: Comparing total sales by branch and city will show which location generates the highest revenue.
+3. Payment preferences: The payment analysis will identify the most frequently used payment method.
+4. Customer behavior: Comparing member and normal customers will reveal differences in transaction counts and average spending.
+5. Customer satisfaction: The overall average rating and ratings by category will help summarize customer feedback.
+6. Monthly trends: Monthly aggregation will show how revenue changes from January to March 2019.
+
+Business interpretation:
+
+These findings can help a supermarket make decisions about inventory, promotions, customer membership programs, and service improvements. For example, high-revenue product categories may require careful stock management, while differences in customer ratings may indicate areas where the shopping experience could be improved.
+
+The team will report actual numerical values and the strongest findings after running and checking the analysis code.
+
+## 9. Project Timeline (5 Weeks)
+
+| Week | Dates | Activities |
+|---|---|---|
+| Week 1 | 07 Sep – 13 Sep | Dataset search and project planning |
+| Week 2 | 14 Sep – 20 Sep | Data cleaning and preparation |
+| Week 3 | 21 Sep – 27 Sep | Data analysis and visualization |
+| Week 4 | 28 Sep – 04 Oct | Further analysis, interpretation of results, and checking outputs |
+| Week 5 | 05 Oct – 13 Oct | Report writing and presentation preparation |
+
+Presentation Date: 14 October 2026
+
+## 10. Outcome of the Project
+
+### What students learned from this project
+
+Through this project, the students will learn how to work with a real-world dataset and use data to answer business questions. They will understand the importance of data quality and how organized analysis can support decision-making.
+
+The team will also practice dividing responsibilities, planning project activities, managing deadlines, and presenting results clearly.
+
+### Skills developed in Pandas data analysis
+
+- Loading CSV files into DataFrames.
+- Exploring dataset structure and data types.
+- Identifying missing values and duplicate records.
+- Cleaning and transforming data.
+- Filtering and sorting records.
+- Grouping data and calculating aggregate statistics.
+- Creating pivot tables.
+- Working with dates and monthly sales.
+- Creating charts using Matplotlib.
+- Interpreting analytical results and communicating findings.
+
+## 11. Conclusion
+
+This project applies Python and Pandas to analyze the Supermarket Sales Dataset. The analysis focuses on product performance, branch revenue, payment methods, customer behavior, ratings, and monthly sales trends.
+
+By completing the project, the DRM team will develop practical data analysis skills and learn how to transform raw data into meaningful information. The results can help explain how sales data supports business decisions and demonstrates the importance of data analysis in IT project management.
+
+## 12. References
+
+1. Aung Pyae Aye. *Supermarket Sales Dataset*. Kaggle.
+   https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales
+
+2. Public CSV copy of the Supermarket Sales Dataset. GitHub.
+   https://github.com/SarahShafqat/Kaggle-Datasets/blob/master/supermarket_sales.csv
+3. Pandas Documentation. *Getting started tutorials*.
+   https://pandas.pydata.org/docs/getting_started/intro_tutorials/
+
+4. Pandas Documentation. *Group by: split-apply-combine*.
+   https://pandas.pydata.org/docs/user_guide/groupby.html
+
+5. Matplotlib Documentation. *Pyplot tutorial*.
+   https://matplotlib.org/stable/tutorials/pyplot.html
+
+## 13. Appendix
+
+### Appendix A: Important code snippets
+
+Check dataset size and missing values
+
+print("Dataset shape:", df.shape)
+print(df.isnull().sum())
+print("Duplicate rows:", df.duplicated().sum())
+Summary statistics
+
+print(df.describe())
+Top five highest-value transactions
+
+print(
+    df.nlargest(5, "Total")[
+        ["Invoice ID", "Product line", "Quantity", "Total"]
+    ]
+)
+Export the cleaned dataset
+
+df.to_csv("cleaned_supermarket_sales.csv", index=False)
+### Appendix B: Additional charts and tables
+
+The team can include the following outputs in the final report:
+
+- Bar chart: total sales by product category.
+- Bar chart: revenue by branch or city.
+- Bar chart: number of transactions by payment method.
+- Line chart: monthly sales trend.
+- Table: member versus normal customer comparison.
+- Table: average rating by product category.
 
