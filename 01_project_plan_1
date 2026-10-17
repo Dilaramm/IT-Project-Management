@@ -1,2 +1,45 @@
+# IT PM Project 1: Project Plan - Team DRM
 
+## 1. Course Information
+- **Course Name:** IT Project Management
 
+## 2. Team Information
+- **Team Name:** DRM
+
+| Role | Name | Student ID | Group | Contact |
+| :--- | :--- | :--- | :--- | :--- |
+| **Team Leader & Project Manager** | Usenadinova Dilaram | 202490349 | 124C | +998 88 721 20 06 |
+| **Information Analyst & Web Content Designer** | Baxtiyorova Ruxshona | 202490081 | 124C | |
+| **AI Strategist & Data (Google Sheets) Specialist** | Ergasheva Madinabonu | 202490107 | 124D | |
+
+## 3. Project Overview
+- **Project Title:** Online Cosmetics Ordering System
+- **Summary:** A website for the online cosmetics shop Zetmart_uz that lets customers browse a categorized product catalog, search for products, and send order requests or inquiries. The site is built with AI tools on Google Sites, project files are managed on GitHub, and all product and inquiry data is stored in Google Sheets so the shop manager can update it without coding.
+
+## 4. Dataset Specification
+- **Dataset Title:** Product Catalog & Customer Inquiry Records
+- **Source / URL:** Google Sheets workbook provided by the customer (Zetmart_uz)
+- **Description:** Product records (name, category, brand, price, stock status, description, photo link) and inquiry/order request logs (timestamp, customer name, phone, products, quantity, status).
+- **Selection Justification:** The data matches the real operations of the shop and is exactly what the website displays and collects. Google Sheets works directly with Google Sites, so the manager can update products and track customer requests without technical skills.
+- **Dimensions:** [XXX] rows × [YY] columns
+
+## 5. Project Objectives
+- **Core Problem Statement:** Zetmart_uz lacks a single professional online presence. Product information is scattered, and customer inquiries and orders are handled manually, which is slow and leads to missed or inaccurate requests.
+- **Key Questions:**
+  1. Which product categories do customers browse and request the most?
+  2. What information do customers need to see on a product page to feel confident asking to order?
+  3. How can the shop manager update prices, stock, and products quickly without coding?
+  4. How can customer inquiries be recorded automatically and without errors?
+- **Expected Insights & Deliverables:**
+  - A working, mobile-friendly Zetmart_uz website built with AI and Google Sites.
+  - A structured Google Sheets workbook for products, categories, and customer inquiries.
+  - Project documentation: Contract, Use Case Diagram, Business Process Model (BPM), Work Breakdown Structure (WBS), Gantt Chart, and a GitHub repository with a short user guide.
+
+## 6. Data Preparation
+- **Ingestion:** Importing the customer's product list and prices into the Google Sheets workbook, with separate sheets for Products, Categories, and Inquiries.
+- **Cleaning Protocol:**
+  - Filling in missing product descriptions, brands, and photo links.
+  - Standardizing product names, category names, and price formats (one currency, no stray text).
+  - Formatting date and time fields consistently.
+  - Removing duplicate products and test inquiry entries.
+- **Feature Engineering:** Adding helper columns such as `in_stock_flag`, `discounted_price`, `order_total`, and `inquiry_status`.
